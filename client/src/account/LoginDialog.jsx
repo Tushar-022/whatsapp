@@ -4,7 +4,7 @@ import { qrCodeImage } from '../constants/data';
 import { useContext } from 'react';
 import { AccountContext } from '../context/AccountProvider';
 import { addUser } from '../service/api';
-import {GoogleLogin} from 'react-google-login'
+import { GoogleLogin } from '@react-oauth/google';
 
 const Component = styled(Box)`
     display: flex; 
@@ -53,7 +53,7 @@ const LoginDialog = () => {
 
     const onLoginSuccess = async (res) => {
         console.log(res);
-        let decoded = res
+        let decoded = jwt_decode(res.credential)
         setAccount(decoded);
         await addUser(decoded);
     };
@@ -85,10 +85,7 @@ const LoginDialog = () => {
                     <Box style={{position: 'absolute', top: '50%', transform: 'translateX(25%) '}}>
                       
                             <GoogleLogin
-                            clientId='407430083695-ic1nkpf3pvjfda0cc5fsfme6mdrcq88n.apps.googleusercontent.com'
                                 onSuccess={onLoginSuccess}
-                                cookiePolicy='single_host_origin'
-                                isSignedIn={true}
                                 onError={onLoginFailure}
                             /> 
                     </Box>
