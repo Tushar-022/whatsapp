@@ -1,10 +1,10 @@
 import { Dialog, Typography, List, ListItem, Box, styled } from '@mui/material';
-import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import { qrCodeImage } from '../constants/data';
 import { useContext } from 'react';
 import { AccountContext } from '../context/AccountProvider';
 import { addUser } from '../service/api';
+import {GoogleLogin} from 'react-google-login'
 
 const Component = styled(Box)`
     display: flex; 
@@ -84,8 +84,10 @@ const LoginDialog = () => {
                     <Box style={{position: 'absolute', top: '50%', transform: 'translateX(25%) '}}>
                       
                             <GoogleLogin
-                                buttonText=""
+                            clientId='407430083695-ic1nkpf3pvjfda0cc5fsfme6mdrcq88n.apps.googleusercontent.com'
                                 onSuccess={onLoginSuccess}
+                                cookiePolicy='single_host_origin'
+                                isSignedIn={true}
                                 onError={onLoginFailure}
                             /> 
                     </Box>
