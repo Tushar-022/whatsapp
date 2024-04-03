@@ -52,7 +52,8 @@ const dialogStyle = {
 const LoginDialog = () => {
 
     const onLoginSuccess = async (res) => {
-        let decoded = jwt_decode(res.credential);
+        console.log(res);
+        let decoded = res
         setAccount(decoded);
         await addUser(decoded);
     };
